@@ -517,7 +517,7 @@ weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) {
 }
 
   // İsim değiştir
-  if(command === "nickdeğiş") {
+  if(command === "isimdeğiş") {
   if(!message.member.hasPermission("MANAGE_NICKNAMES")) 
   return message.channel.send("Yetkin yok!")
 let member = message.mentions.members.first();
@@ -531,35 +531,29 @@ message.channel.send("Değiştirdim!")
 }
 
   // Bazen Müslüm Babaya bağlarsın...
-  if(command === "sigara") {
-  message.channel.send(':smoking:')
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud:'))
-  .then(message => message.edit(':cry::smoking:'))
-  .then(message => message.edit(':cry::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud::cloud:'))
-  .then(message => message.edit(':cry::cloud:'))
-  .then(message => message.edit(':cry::smoking:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud::cloud:'))
-  .then(message => message.edit(':cry::smoking::cloud:'))
-  .then(message => message.edit(':cry::smoking:'))
-  .then(message => message.edit('**Sigara bitti.** sigara sağlığa zararlıdır **Sigara İçmeyiniz!**'))
+  if(command === "yak") {
+ msg.channel.send(':cry::smoking:')
+     .then(msg => msg.edit(':cry::smoking:'))
+     .then(msg => msg.edit(':cry::smoking::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::smoking::cloud:'))
+     .then(msg => msg.edit(':cry::smoking:'))
+     .then(msg => msg.edit(':cry::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud::cloud:'))
+     .then(msg => msg.edit(':cry::cloud:'))
+     .then(msg => msg.edit('**Sigara bitti** Sigara Sağlığa Zarar Verir **Sigara içmeyiniz**'))
 }
 
   // ＭＵＴＥＬＥＮＤＩＮ　ば屋や

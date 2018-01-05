@@ -86,70 +86,83 @@ client.on("guildDelete", guild => {
   //client.user.setGame(`parham.cf | p!yardım | ${client.guilds.size} sunucu`);
 });
 
-// Yeni üye mesajları
 client.on('guildMemberAdd', member => {
-const channel = member.guild.channels.find('name', 'sehirmeydani');
-if (!channel) return;
+  const channel = member.guild.channels.find('name', 'ana-sohbet');
+  if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`${member}, sunucuya katıldı! Merhaba dostum!`)
-  .setImage("https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif")
-channel.send(embed);
+  .setDescription(`${member}, Sunucuya Hoşgeldin!`)
+  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  channel.send(embed);
 });
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find('name', 'sehirmeydani');
+  if (!channel) return;
+  let embed = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .setDescription(`${member}, Sunucuya Hoşgeldin!`)
+  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  channel.send(embed);
+});
 
-// Yeni üye mesajları
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find('name', 'hosgeldiniz');
+  if (!channel) return;
+  let embed = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .setDescription(`${member}, Sunucuya Hoşgeldin!`)
+  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  channel.send(embed);
+});
+
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'hosgeldin');
   if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`${member}, sunucuya katıldı! Merhaba dostum!`)
-  .setImage("https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif")
+  .setDescription(`${member}, Sunucuya Hoşgeldin!`)
+  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
   channel.send(embed);
 });
 
-// Yeni üye mesajları
-client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find('name', 'sohbet');
-  if (!channel) return;
-  let embed = new Discord.RichEmbed()
-  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`${member}, sunucuya katıldı! Merhaba dostum!`)
-  .setImage("https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif")
-  channel.send(embed);
-});
-
-// Yeni üye mesajları
 client.on('guildMemberRemove', member => {
   const channel = member.guild.channels.find('name', 'hosgeldin');
   if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`Hoşçakal :wave:, ${member}. Seni özleyeceğiz :cry:`)
-  .setImage("https://media1.tenor.com/images/860550d763f170f72b6a0f4f5bd95592/tenor.gif?itemid=5340846")
+  .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
+  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
   channel.send(embed);
 });
 
-// Yeni üye mesajları
+client.on('guildMemberRemove', member => {
+  const channel = member.guild.channels.find('name', 'hosgeldiniz');
+  if (!channel) return;
+  let embed = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
+  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
+  channel.send(embed);
+});
+
 client.on('guildMemberRemove', member => {
   const channel = member.guild.channels.find('name', 'sehirmeydani');
   if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`Hoşçakal :wave:, ${member}. Seni özleyeceğiz :cry:`)
-  .setImage("https://media1.tenor.com/images/860550d763f170f72b6a0f4f5bd95592/tenor.gif?itemid=5340846")
+  .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
+  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
   channel.send(embed);
 });
 
-// Yeni üye mesajları
 client.on('guildMemberRemove', member => {
-  const channel = member.guild.channels.find('name', 'sohbet');
+  const channel = member.guild.channels.find('name', 'ana-sohbet');
   if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-  .setDescription(`Hoşçakal :wave:, ${member}. Seni özleyeceğiz :cry:`)
-  .setImage("https://media1.tenor.com/images/860550d763f170f72b6a0f4f5bd95592/tenor.gif?itemid=5340846")
+  .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
+  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
   channel.send(embed);
 });
 
@@ -176,26 +189,37 @@ if (message.channel.type !== "text") return;
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sa') {
-    message.channel.send(`Aleyküm selam, hoşgeldin ^^`)
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sea') {
-    message.channel.send(`Aleyküm selam, hoşgeldin ^^`)
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamun aleyküm') {
-    message.channel.send(`Aleyküm selam, hoşgeldin ^^`) 
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`) 
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamın aleyküm') {
-    message.channel.send(`Aleyküm selam, hoşgeldin ^^`)
-    
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  }
+});
+
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'selamün aleyküm') {
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  }
+});
+
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'selam') {
+    message.channel.send(`Selam Dostum Çek Bi Sandalye Otur Şuraya.`)
   }
 });
 
@@ -209,45 +233,18 @@ client.on("message", async message => {
   // Haydi, birkaç komut deneyelim huh? 
   
   //Hey bu bot n'apıyor?
-  if(command === "yardım") {
-    msg.channel.send({embed: {
-      color: Math.floor(Math.random() * (0xFFFFFF + 1)),
-      author: {
-        name: msg.author.username,
-        icon_url: msg.author.avatarURL
-      },
-      title: "Beni kullandigin için saol!",
-      url: "",
-      description: "Komulari asagida görebilirsin",
-      fields: [{
-          name: "Ana komutlar:",
-          value: "**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok"
-        },
-        {
-          name: "Admin Komutları",
-          value: "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir."
-        },
-        {
-          name: "Yapımcı Komutları",
-          value: "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür"
-        },
-
-        {
-          name: "Davet et",
-          value: "[Beni Davet Etmek Için Tikla](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864)"
-        },
-        {
-          name: "Bilgi",
-          value: `${client.users.size} kullanici,  ${client.channels.size} kanal ve ${client.guilds.size} sunucu.`
-        }
-      ],
-      timestamp: new Date(),
-      footer: {
-        icon_url: client.user.avatarURL,
-      }
-    }
-  })
-}
+ if(command === "yardım") {
+    let embed = new Discord.RichEmbed()
+    .setTitle("Komutlarım Aşşağıda")
+    .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+    .addField("**Kullanıcı Komutları**",
+    "**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok")
+    .addField("**Admin Komutları**", 
+    "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir.")
+    .addField("**Yapımcı Komutları**",
+    "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür")
+        message.channel.send(embed)
+  }
   // Botun pingi ve API gecikmesi
   if(command === "ping") {
     const m = await message.channel.send("Pingim mi?");

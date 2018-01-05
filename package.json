@@ -1,5 +1,5 @@
 {
-  "name": "parham-bot",
+  "name": "Kebapbot",
   "version": "1.2.1",
   "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
   "main": "node app.js",

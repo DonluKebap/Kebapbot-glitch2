@@ -505,14 +505,14 @@ weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) {
     let embed = new Discord.RichEmbed()
    .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
    .setImage('https://cdn.discordapp.com/attachments/358322476167462914/366966782252023808/1503472_o8efa.png')
-   msg.channel.send(embed);
+   message.channel.send(embed);
  }
        
        else {
     let embed = new Discord.RichEmbed()
    .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
    .setImage('https://cdn.discordapp.com/attachments/358322476167462914/366966718486282240/1TL_reverse.png')
-   msg.channel.send(embed);
+   message.channel.send(embed);
  } 
 }
 
@@ -532,7 +532,7 @@ message.channel.send("Değiştirdim!")
 
   // Bazen Müslüm Babaya bağlarsın...
   if(command === "yak") {
- msg.channel.send(':cry::smoking:')
+ message.channel.send(':cry::smoking:')
      .then(msg => msg.edit(':cry::smoking:'))
      .then(msg => msg.edit(':cry::smoking::cloud:'))
      .then(msg => msg.edit(':cry::smoking::cloud::cloud:'))
@@ -593,7 +593,7 @@ message.channel.send("Değiştirdim!")
           if(susturulacak.roles.has(role.id)) return message.channel.send("")
   
           await susturulacak.addRole(role);
-          message.channel.send(`${member} bukişi başarıyla susturuldu`)
+          message.channel.send(`Bu kişi başarıyla susturuldu`)
   }
 
   // MUTE AÇMA
@@ -608,7 +608,7 @@ message.channel.send("Değiştirdim!")
               if(!role || !susturulacak.roles.has(role.id)) return message.channel.send("bu kişi zaten cezalı değil ta**akmı geçiyon olum!");
     
               susturulacak.removeRole(role);
-              message.channel.send(`${member} bu Kullanıcının mutesi Kaldırıldı.`)
+              message.channel.send(`Bu Kullanıcının mutesi Kaldırıldı.`)
     }
 
   // Bazı kullanıcılar rahatsız edicidir. Suratlarına tekmeyi bas!

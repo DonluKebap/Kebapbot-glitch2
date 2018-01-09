@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const client = new Discord.Client();
 const dateFormat = require('dateformat');
 const moment = require("moment");
@@ -188,8 +187,8 @@ if (message.channel.type !== "text") return;
 });
 
 client.on('message', msg => {
-  if (msg.content === 'En iyi kim?') {
-    msg.reply('Benim Tabi len.');
+  if (msg.content.toLowerCase() === 'En iyi kim?') {
+    msg.channel.send('Benim Tabi len.');
   }
 });
 
@@ -287,6 +286,19 @@ client.on("message", async message => {
     "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür \n**Resimdeğiş-**Kebabın Resmi Değişir")
 	.setThumbnail('https://images-ext-2.discordapp.net/external/H9MFMPBYzyQnKPZlkCigG_o-AlIOBL1WydtJzTuYHUs/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/363748013988118538/c0255a81cd461a9b8893c2f9e6322209.png?width=250&height=250')
         message.channel.send(embed)
+ }
+  
+ if (command === "öldür") {
+      let member = message.mentions.members.first()
+    if(!member)
+    return message.reply("Kimi Öldürecen");
+ // EMBEDLER HARİKADIR! MÜKKEMMEL MESAJLAR YARATMAK İÇİN BUNLARI SİLME <3
+    const Discord = require('discord.js')
+         let öldür = new Discord.RichEmbed()
+		 .setDescription(`${message.author} ${member} kullanıcısını Öldürdü!`)
+         .setImage('https://cdn.discordapp.com/attachments/363746758083477505/400337232625401856/animation_2.gif')
+         .setFooter("DonluKebap")
+         return message.channel.send(öldür);
  }
  
  if (command === "ayrandök") {

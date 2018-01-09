@@ -187,6 +187,12 @@ if (message.channel.type !== "text") return;
   }
 });
 
+client.on('message', msg => {
+  if (msg.content === 'En iyi kim?') {
+    msg.reply('Benim Tabi len.');
+  }
+});
+
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sa') {
     message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
@@ -270,11 +276,11 @@ client.on("message", async message => {
     let embed = new Discord.RichEmbed()
     .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
     .addField("**Eğlence Komutları**",
-    " **Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok .")
+    " **Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok . \n**Ayrandök-**Etiketlediğiniz Kullanıcıya Ayran Dökersiniz!")
 	.addField("**Kullanıcı Komutları**",
 	"**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar.")
-	.addField("Seviye Komutları"),
-	"**Seviyem-**Seviyenizi Gösterir \n**Puanlarım-**Seviye Puanınızı Gösterir."
+	.addField("**Seviye Komutları**",
+	"**Seviyem-**Seviyenizi Gösterir. \n**Puanlarım-**Seviye Puanınızı Gösterir.")
     .addField("**Admin Komutları**",	
     "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir. \n**Duyuruyap-**ismindende anlaşılacağı gibi kebap duyur yapar.")
     .addField("**Yapımcı Komutları**",

@@ -26,13 +26,13 @@ setInterval(() => {
 
 client.on("ready", () => {
   // Bot düzgünce başladığında bu eylem çalışır
-  console.log(`[BOT]: ${client.users.size} kullanıcıya ve ${client.guilds.size} sunucuya yardıma hazırım! Silahlandım!`); 
+  console.log(`[BOT]: ${client.users.size} kullanıcıya ve ${client.guilds.size} sunucuya gua hazırım! Silahlandım!`); 
   // Botunuzun oyununu değiştirir, örn: !yardım | 21 sunucuda oynuyor şeklinde.
   // Bunu yayında olarak da yapabilirsin. örn: !yardım yayında şeklinde
   // client.user.setGame(`@Parham yardım | parham.cf`);
 });
 
-const prefix = "p!";
+const prefix = "k-";
 client.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type !== "text") return;
@@ -190,36 +190,69 @@ if (message.channel.type !== "text") return;
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sa') {
     message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sea') {
     message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamun aleyküm') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`) 
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamın aleyküm') {
     message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamün aleyküm') {
     message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
   }
+});
+
+client.on('message', message => {
+  if (message.content.toLowerCase() === 's.a') {
+    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
+  } 
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selam') {
     message.channel.send(`Selam Dostum Çek Bi Sandalye Otur Şuraya.`)
+    message.react("🇦")
+    message.react("🇸")
+    message.react("🌯")
+  }
+});
+
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'Kebap') {
+    message.reply(`Efendim Birader?`)
   }
 });
 
@@ -235,21 +268,26 @@ client.on("message", async message => {
   //Hey bu bot n'apıyor?
  if(command === "yardım") {
     let embed = new Discord.RichEmbed()
-    .setTitle("Komutlarım Aşşağıda")
+    .setThumbnail(`https://resimyukle.xyz/resim/0ANfGC`)
     .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
     .addField("**Kullanıcı Komutları**",
-    "**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok")
+    "**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar.")
     .addField("**Admin Komutları**", 
-    "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir.")
+    "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir. \n**Duyuruyap-**ismindende anlaşılacağı gibi kebap duyur yapar.")
     .addField("**Yapımcı Komutları**",
-    "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür")
+    "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür \n**Resimdeğiş-**Kebabın Resmi Değişir")
         message.channel.send(embed)
-  }
+ }
+
   // Botun pingi ve API gecikmesi
   if(command === "ping") {
     const m = await message.channel.send("Pingim mi?");
     m.edit(`Pong!\n**Gecikmem: ${m.createdTimestamp - message.createdTimestamp}ms.**`);
   }
+  
+ if(command === "sunucularım") {
+    const servers = client.guilds.map(g => g.name).join("\n");
+    message.channel.send(`**Aga bulunduğum sunucular** **\n\n${servers}**\n\nAyrıca toplam **${client.users.size}** kullanıcıya hizmet veriyorum!`);}
 
   // Bota bir şey söyletmek için lazım...
   if(command === "yaz") {
@@ -299,9 +337,9 @@ client.on("message", async message => {
     message.channel.send(`Profil resmim **${sayMessage}** olarak değiştirildi :ok_hand:`)
   }
 
-  if(command === "duyuru") {
+  if(command === "duyuruyap") {
     if(!message.member.hasPermission("MANAGE_NICKNAMES"))
-    return (message.channel.send("Mesajları Yöneyme yetkin yok"))
+    return (message.channel.send("Mesajları Yönetme yetkin yok"))
     const duyuruYap = args.join(" ");
     message.delete().catch(O_o=>{});
     let embedyaz = new Discord.RichEmbed()
@@ -533,29 +571,28 @@ message.channel.send("Değiştirdim!")
   // Bazen Müslüm Babaya bağlarsın...
   if(command === "yak") {
  message.channel.send(':cry::smoking:')
-     .then(msg => msg.edit(':cry::smoking:'))
-     .then(msg => msg.edit(':cry::smoking::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::smoking::cloud:'))
-     .then(msg => msg.edit(':cry::smoking:'))
-     .then(msg => msg.edit(':cry::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud::cloud:'))
-     .then(msg => msg.edit(':cry::cloud:'))
-     .then(msg => msg.edit('**Sigara bitti** Sigara Sağlığa Zarar Verir **Sigara içmeyiniz**'))
+     .then(message => message.edit(':cry::smoking:'))
+     .then(message => message.edit(':cry::smoking::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud::cloud:'))
+     .then(message => message.edit(':cry::smoking::cloud:'))
+     .then(message => message.edit(':cry::smoking:'))
+     .then(message => message.edit(':cry::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud::cloud:'))
+     .then(message => message.edit(':cry::cloud:'))
+     .then(message => message.edit('**Sigara bitti** Sigara Sağlığa Zarar Verir **Sigara içmeyiniz**'))
 }
-
   // ＭＵＴＥＬＥＮＤＩＮ　ば屋や
   if(command === "sustur") {
   if(!message.member.hasPermission("MANAGE_CHANNELS")) 
@@ -676,3 +713,5 @@ message.channel.send("Değiştirdim!")
   };
 });
 client.login(config.token);
+
+

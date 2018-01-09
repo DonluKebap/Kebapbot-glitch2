@@ -268,16 +268,34 @@ client.on("message", async message => {
   //Hey bu bot n'apıyor?
  if(command === "yardım") {
     let embed = new Discord.RichEmbed()
-    .setThumbnail(`https://resimyukle.xyz/resim/0ANfGC`)
     .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-    .addField("**Kullanıcı Komutları**",
-    "**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar.")
-    .addField("**Admin Komutları**", 
+    .addField("**Eğlence Komutları**",
+    " **Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok .")
+	.addField("**Kullanıcı Komutları**",
+	"**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar.")
+	.addField("Seviye Komutları"),
+	"**Seviyem-**Seviyenizi Gösterir \n**Puanlarım-**Seviye Puanınızı Gösterir."
+    .addField("**Admin Komutları**",	
     "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir. \n**Duyuruyap-**ismindende anlaşılacağı gibi kebap duyur yapar.")
     .addField("**Yapımcı Komutları**",
     "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür \n**Resimdeğiş-**Kebabın Resmi Değişir")
+	.setThumbnail('https://images-ext-2.discordapp.net/external/H9MFMPBYzyQnKPZlkCigG_o-AlIOBL1WydtJzTuYHUs/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/363748013988118538/c0255a81cd461a9b8893c2f9e6322209.png?width=250&height=250')
         message.channel.send(embed)
  }
+ 
+ if (command === "ayrandök") {
+	     let member = message.mentions.members.first()
+    if(!member)
+    return message.reply("Kime Dökçen?");
+ // EMBEDLER HARİKADIR! MÜKKEMMEL MESAJLAR YARATMAK İÇİN BUNLARI SİLME <3
+    const Discord = require('discord.js')
+         let ayran = new Discord.RichEmbed()
+		 .setDescription(`${member} kullanıcısına ayran döktün!`)
+         .setImage('https://cdn.discordapp.com/attachments/363746758083477505/400284061580394496/69BO9_1483271159_8723.jpg')
+         .setFooter("DonluKebap")
+         return message.channel.send(ayran);
+ }
+	 
 
   // Botun pingi ve API gecikmesi
   if(command === "ping") {
@@ -713,5 +731,4 @@ message.channel.send("Değiştirdim!")
   };
 });
 client.login(config.token);
-
 

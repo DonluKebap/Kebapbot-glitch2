@@ -27,51 +27,13 @@ setInterval(() => {
 client.on("ready", () => {
   // Bot düzgünce başladığında bu eylem çalışır
   console.log(`[BOT]: ${client.users.size} kullanıcıya ve ${client.guilds.size} sunucuya gua hazırım! Silahlandım!`); 
+  client.user.setGame(`k-yardım | k-davet | V1.2.0 | Hacklenme İçin Herkesten Özür Diliyoruz`, `https://www.twitch.tv/donlukebap`);
   // Botunuzun oyununu değiştirir, örn: !yardım | 21 sunucuda oynuyor şeklinde.
   // Bunu yayında olarak da yapabilirsin. örn: !yardım yayında şeklinde
   // client.user.setGame(`@Parham yardım | parham.cf`);
 });
 
 const prefix = "k-";
-client.on("message", message => {
-  if (message.author.bot) return;
-  if (message.channel.type !== "text") return;
-
-  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    } else {
-      let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-      if (curLevel > row.level) {
-        row.level = curLevel;
-        sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-        message.reply(`**${curLevel}** seviye oldun böyle devam et!`);
-      }
-      sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-    }
-  }).catch(() => {
-    console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    });
-  });
-
-  if (!message.content.startsWith(prefix)) return;
-
-  if (message.content.startsWith(prefix + "level")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("Şuanki seviyen 0");
-      message.reply(`Şuanki seviyeniz ${row.level}`);
-    });
-  } else
-
-  if (message.content.startsWith(prefix + "points")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("puanın yok!");
-      message.reply(`Toplamda ${row.points} puanın var, İyi gidiyorsun!`);
-    });
-  }
-});
 
 client.on("guildCreate", guild => {
   // Bu eylem bot yeni bir sunucuya katıldığında botunuzu tetikler.
@@ -86,6 +48,8 @@ client.on("guildDelete", guild => {
   //client.user.setGame(`parham.cf | p!yardım | ${client.guilds.size} sunucu`);
 });
 
+
+
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'ana-sohbet');
   if (!channel) return;
@@ -96,13 +60,41 @@ client.on('guildMemberAdd', member => {
   channel.send(embed);
 });
 
+client.on('guildMemberRemove', member => {
+  const channel = member
+  if (!channel) return;
+  let embed = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .addField(" Sunucudan Ayrıldığın İçin Üzüldük Görüşürüz!",
+  "Umarım Birdaha Gelirsin!")          
+  .addField("Bu Sunucuda Kebap Botu Kullanılmaktadır",
+  "[Beni Sunucuna eklemek Için Tikla](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864)")         
+  .setThumbnail(client.user.avatarURL)
+  .addField("Destek Sunucusu",
+  "[Destek Sunucusuna Gitmek İçin Tıkla!](https://discord.gg/nRNFpPM)")
+  channel.send(embed);
+});
+
+client.on('guildMemberAdd', member => {
+  const channel = member
+  if (!channel) return;
+  let embed = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .addField("Bu Sunucuda Kebap Botu Kullanılmaktadır",
+  "[Beni Sunucuna eklemek Için Tikla](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864)")         
+  .setThumbnail(client.user.avatarURL)
+  .addField("Destek Sunucusu",
+  "[Destek Sunucusuna Gitmek İçin Tıkla!](https://discord.gg/nRNFpPM)")
+  channel.send(embed);
+});
+
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'sehirmeydani');
   if (!channel) return;
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucuya Hoşgeldin!`)
-  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -112,7 +104,7 @@ client.on('guildMemberAdd', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucuya Hoşgeldin!`)
-  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -122,7 +114,7 @@ client.on('guildMemberAdd', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucuya Hoşgeldin!`)
-  .setImage("https://media.giphy.com/media/xULW8LVPCQrk0drq4E/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -132,7 +124,7 @@ client.on('guildMemberRemove', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
-  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -142,7 +134,7 @@ client.on('guildMemberRemove', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
-  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -152,7 +144,7 @@ client.on('guildMemberRemove', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
-  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
@@ -162,40 +154,32 @@ client.on('guildMemberRemove', member => {
   let embed = new Discord.RichEmbed()
   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
   .setDescription(`${member}, Sunucudan Ayrıldı Görüşürüz!`)
-  .setImage("https://media.giphy.com/media/3oFzm2dJ6tzcmNMFt6/giphy.gif")
+  .setThumbnail(member.user.avatarURL)
   channel.send(embed);
 });
 
-client.on("message", message => {
-  if (message.author.bot) return;
-if (message.channel.type !== "text") return;
-
-  if (!message.content.startsWith(prefix)) return;
-
-  if (message.content.startsWith(prefix + "seviyem")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("Daha Seviyen Yok ama uğraşırsan olur;(");
-      message.reply(`Şuanki seviyeniz ${row.level}`);
-    });
-  } else
-
-  if (message.content.startsWith(prefix + "puanlarım")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("Puanın Yok!");
-      message.reply(`Toplamda ${row.points} puanın var, Devam Et Böyle`);
-    });
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'Hackerlar') {
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.reply(`Orul orul Orospu Çocuğu`)
   }
 });
 
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'En iyi kim?') {
-    msg.channel.send('Benim Tabi len.');
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'kebap') {
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.reply(`Efendim Birader?`)
+    message.react("🌯")
   }
 });
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sa') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -204,7 +188,9 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'sea') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -213,7 +199,9 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamun aleyküm') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -222,7 +210,9 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamın aleyküm') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -231,7 +221,9 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selamün aleyküm') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})  
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -240,7 +232,9 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 's.a') {
-    message.channel.send(`Aleyküm selam,  Kardeşim  hoş geldin Sandalye çek otur şuraya`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})   
+    message.channel.send(`Aleyküm Selam,  Kardeşim  Hoş Geldin Sandalye çek otur şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
@@ -249,16 +243,12 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.toLowerCase() === 'selam') {
-    message.channel.send(`Selam Dostum Çek Bi Sandalye Otur Şuraya.`)
+  if(message.guild.id === "264445053596991498" || message.guild.id === "264445053596991498")return({ 
+})    
+    message.channel.send(`Selam Dostum Çek Bi Sandalye Otur Şuraya :heart:`)
     message.react("🇦")
     message.react("🇸")
     message.react("🌯")
-  }
-});
-
-client.on('message', message => {
-  if (message.content.toLowerCase() === 'Kebap') {
-    message.reply(`Efendim Birader?`)
   }
 });
 
@@ -275,17 +265,21 @@ client.on("message", async message => {
  if(command === "yardım") {
     let embed = new Discord.RichEmbed()
     .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-    .addField("**Eğlence Komutları**",
-    " **Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok . \n**Ayrandök-**Etiketlediğiniz Kullanıcıya Ayran Dökersiniz!")
-	.addField("**Kullanıcı Komutları**",
-	"**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar.")
-	.addField("**Seviye Komutları**",
-	"**Seviyem-**Seviyenizi Gösterir. \n**Puanlarım-**Seviye Puanınızı Gösterir.")
-    .addField("**Admin Komutları**",	
-    "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir. \n**Duyuruyap-**ismindende anlaşılacağı gibi kebap duyur yapar.")
-    .addField("**Yapımcı Komutları**",
+    .addField("**__Kebap Bot__**",
+    "Komutlarım Aşşağıda!")          
+    .addField("**__Eğlence Komutları__**",
+    " **Kebappişir-** İsmindende Anlayacağınız Gibi Kebap Pişirirsiniz! \n**Kebapye-**Kebap Yersiniz! \n**KebapIsmarla-**Herkese Kebap Ismarlarsınız \n**yak-**Bi Dal Sigara Yakarsınız :( \n**Yaz-** Bot Dediğiniz Şeyi Yazar \n**Atasözü-** Kebap Etiketlediğiniz Kişiye Atasözü söyler \n**Kebabasor-**Kebap Sorduğunuz Sorulara Evet Yada Hayır diye cevap verir \n**yazıtura-**Anlatılcak bişey yok . \n**Ayrandök-**Etiketlediğiniz Kullanıcıya Ayran Dökersiniz! \n**Öldür-**Etiketlediğiniz kişiyi öldürürsünüz \n**Ayraniç-**Ayran Yani Anlatılcak Bişey yok. \n**Kaçcm-**Kaç cm olduğunu tahimn etmeye çalışır. \n**deepturkishweb-**Anlayağınız Gibi Deepturkishwebin Komik Yorumlarını Söyler \n**gmod-gif-**Komik Gmod Gifleri Atar \n**Söv-**Kebap Etiketlediğiniz Kişiye Söver")
+	.addField("**__Kullanıcı Komutları__**",
+	"**Yardım-**Komutları Gösterir Aynı Şimdiki Gibi! \n**Ping-**Botun Pingini Gösterir \n**davet-**Botun Davet Linkini Atar \n**anketaç-**Kebap İstediğiniz Gibi Bi Anket Açar. \n**BugünHavanasıl--**kebap Söylediğiniz Sehrin Hava Durumunu Söyler. \n**Sunucu-**Sunucu Bilgilerini Gösterir. \n**Profilbilgi-**Etiketlediğiniz Kişinin Profil Bilgisi Gözükür.")
+    .addField("**__Admin Komutları__**",	
+    "**Sustur-**Etiketlediğiniz Kişi Mutelenir \n**susturaç-**Etiketlediğiniz Kişinin Mutesi Kalkar \n**Banat-**Etiketlediğiniz Kişiye Ban Atar \n**At-**Etiketlediğiniz Kişiye Kick Atar \n**Temizle-**Belirttiğiniz Kadar Mesaj Siler \n**İsimdeğiş-**Etiketlediğiniz Kişinin ismi Değişir. \n**Duyuruyap-**ismindende anlaşılacağı gibi kebap duyuru yapar.")
+    .addField("**__Yapımcı Komutları__**",
     "**eval-**Komutu Denemek İçin Kullanılır \n**Yenidenbaşlat-**Bot Yeniden Başlatılır \n**Load-** İstediğiniz Komutu Yükler \n**unload-** İstediğiniz komutu devre dışı bırakır \n**Reload-**Söylediğiniz Komut Yeniden Başlatılır \n**oyundeğiş-**Kebabın oyun durumu söylediğiniz şeye dönüşür \n**Resimdeğiş-**Kebabın Resmi Değişir")
-	.setThumbnail('https://images-ext-2.discordapp.net/external/H9MFMPBYzyQnKPZlkCigG_o-AlIOBL1WydtJzTuYHUs/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/363748013988118538/c0255a81cd461a9b8893c2f9e6322209.png?width=250&height=250')
+    .addField("**__Yenilikler__**",
+    "**•Giriş-Çıkış mesajları yenilendi eğer Giriş-çıkış Mesajlarını Açmak İsityosanız #hosgeldiniz-#hosgeldin-#sehirmeydanı ve #anasohbet adlı kanallar yapabilirsiniz.** \n**•Daha Fazla Yenilik görmek İçin k-yenilikler yazabilirsiniz.**")
+    .addField("Davet",
+    "[Beni Davet Etmek Için Tikla](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864)")
+    .setImage("https://media.discordapp.net/attachments/389448663270817792/404683705383124992/paperfold.png?width=400&height=300")
         message.channel.send(embed)
  }
   
@@ -294,13 +288,23 @@ client.on("message", async message => {
     if(!member)
     return message.reply("Kimi Öldürecen");
  // EMBEDLER HARİKADIR! MÜKKEMMEL MESAJLAR YARATMAK İÇİN BUNLARI SİLME <3
-    const Discord = require('discord.js')
-         let öldür = new Discord.RichEmbed()
-		 .setDescription(`${message.author} ${member} kullanıcısını Öldürdü!`)
-         .setImage('https://cdn.discordapp.com/attachments/363746758083477505/400337232625401856/animation_2.gif')
-         .setFooter("DonluKebap")
-         return message.channel.send(öldür);
+         var flip = Math.floor(Math.random() * 2 + 1);
+       if (flip === 1) {
+    let embed = new Discord.RichEmbed()
+   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+   .setDescription(`${message.author} ${member} kullanıcısını Öldürdü!`)
+   .setImage('https://cdn.discordapp.com/attachments/363746758083477505/400337232625401856/animation_2.gif')
+   message.channel.send(embed);
  }
+       
+       else {
+    let embed = new Discord.RichEmbed()
+   .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .setDescription(`${message.author} ${member} kullanıcısını Öldürdü!`)
+   .setImage('https://images-ext-2.discordapp.net/external/IMg6cOM9EM8D5f6lC3AL-LOrsltOsuspw0ein9tKlHE/https/cdn.discordapp.com/attachments/389448663270817792/400729271594778645/animation_7.gif')
+   message.channel.send(embed);
+ } 
+}
  
  if (command === "ayrandök") {
 	     let member = message.mentions.members.first()
@@ -309,12 +313,23 @@ client.on("message", async message => {
  // EMBEDLER HARİKADIR! MÜKKEMMEL MESAJLAR YARATMAK İÇİN BUNLARI SİLME <3
     const Discord = require('discord.js')
          let ayran = new Discord.RichEmbed()
-		 .setDescription(`${member} kullanıcısına ayran döktün!`)
+		 .setDescription(`${message.author} ${member} kullanıcısına ayran döktü!`)
          .setImage('https://cdn.discordapp.com/attachments/363746758083477505/400284061580394496/69BO9_1483271159_8723.jpg')
-         .setFooter("DonluKebap")
          return message.channel.send(ayran);
  }
-	 
+  
+  if (command === "ayraniç") {
+     message.channel.sendMessage({
+    "embed": {
+            title: 'Ayran Kebabın Yanında Vazgeçilmezdir!',
+            description: "oh Mis Gibi Geldi!",
+            url: '',
+            "image": {
+            "url": "https://cdn.discordapp.com/attachments/363746758083477505/400359476042924034/Some_ayran_in_copper_cups.jpg",
+            }
+        }
+    });
+};    
 
   // Botun pingi ve API gecikmesi
   if(command === "ping") {
@@ -349,6 +364,49 @@ client.on("message", async message => {
       //Something
      });
 }
+  
+  if(command === "söv") {
+  let kufur=[
+    "bak senin ananı öttüre öttüre sikerim orospu çocuğu",
+    "ananın mına bacagımı sokup yarım vole attıgımının evladi",
+    "senin ananı siker baban olurum sonra intihar edip seni piç bırakırım",
+    "bak seni bi sikerim götünü hissetmezsin yarrağımın anteni",
+    "derini yüzüp onu önce güneşte kurutur, sonra da ondan prezervatif yapıp ananı bir güzel sikerim",
+    "elini götüne sokarım sürahi olarak yaşarsın",
+    "seni bir sikerim boş otobüste ayakta gidersin",
+    "seni telefon direğine bağlar paralelden tüm sülaleni sikerim.",
+    "seni bir sikerim dokuz ay bulanık sıçarsın...",
+    "seni boğaz köprüsünün ortasında sikerim hem asya izler hem avrupa",
+    "senin götünü keser çorap lastiği yaparım",
+    "seni bi sikerim bluetooh un hata verir kapsama alanın genişler.",
+    "o tuşlara basan ufacık parmaklarının arasına sokar felç edene kadar siker o felç olan parmaklarını kesip organ mafyasına satarım elde ettigim gelirin bi kısmını görme engelliler vakfına bağışlar kalan kısmıda annenle çarçur eder babanın delirmesini sağlar ocağına incir ağacı diker ağacın gölgesinde teyzeni dallı budaklı sikerim senin",
+    "senin ananı öttüre öttüre sikerim orospu evladı",
+    "küfür ederdim ama anan çok yordu",
+    "öyle yan durup şekilli mekilli tişört giyme ananı götünden siker Erol Taş gibi kiraz ağacından kamçı yapar döverim",
+  ]
+     let member = message.mentions.members.first()
+   if(!member)return message.channel.send({embed: {
+ color: Math.floor(Math.random() * (0xFFFFFF + 1)),
+ description: ('Birini Etiketlesen Yada Kendinide Etiketleyebilirsin.')
+}});
+  if(member.id === "357860399129034752")return message.channel.send({embed: {
+ color: Math.floor(Math.random() * (0xFFFFFF + 1)),
+ description: ('Babama Neden Söveyim Lan Orospu Çocuğu!')
+}})
+  if(member.id === client.user.id){
+    message.channel.send({embed: {
+ color: Math.floor(Math.random() * (0xFFFFFF + 1)),
+ description: (`Kendimemi Söveyim Orospu Çocuğu!`)
+}})
+  }
+  else{
+  message.channel.send({embed: {
+ color: Math.floor(Math.random() * (0xFFFFFF + 1)),
+ description: (`${member} ${kufur[Math.floor(Math.random() * 15)]}.`)
+}})
+  }
+  
+}
 
   if(command === "oyundeğiş") {
     if(message.author.id !== '357860399129034752') 
@@ -368,7 +426,7 @@ client.on("message", async message => {
 
   if(command === "resimdeğiş") {
     if(message.author.id !== '357860399129034752') 
-    return message.reply('kardeş yetkinyok uğraşma!');
+    return message.reply('kardeş yetkin yok uğraşma!');
     const sayMessage = args.join(` `);
     client.user.setAvatar(sayMessage);
     message.channel.send(`Profil resmim **${sayMessage}** olarak değiştirildi :ok_hand:`)
@@ -396,7 +454,7 @@ client.on("message", async message => {
         fields: [
             {
               name: "Davet et",
-              value: "[Beni Davet Etmek Için Tikla](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864)"
+              value: "[Beni Davet Etmek Için Tikla!](https://discordapp.com/oauth2/authorize?client_id=363748013988118538&scope=bot&permissions=201337864) \n[Kod Ninjaları-Beta Sunucusuna Gitmek İçin Tıkla!](https://discord.gg/nRNFpPM)"
             }
           ],
           timestamp: new Date(),
@@ -421,7 +479,7 @@ client.on("message", async message => {
         }
     member = message.guild.member(user);
     let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
-       if (roles.length < 1) roles = ['AHH! BU KULLANICININ ROLÜ YOK!'];
+       if (roles.length < 1) roles = ['Bu Kullanıcının Rolü Yok!'];
     const millisCreated = new Date().getTime() - user.createdAt.getTime();
     const daysCreated = moment.duration(millisCreated).format("Y [yıl], D [gün], H [saat], m [dakika], s [saniye]")
     const millisJoined = new Date().getTime() - member.joinedAt.getTime();
@@ -453,7 +511,13 @@ client.on("message", async message => {
          message.channel.send({embed: embed5})
     
     }
-
+  
+    if(command === "yenilikler") {
+             let güncel = new Discord.RichEmbed()
+		     .addField("**Kebap Bot V1.2.0 Sürümünü Kullanıyorsunuz**",
+	"**k-Söv** Komutu Eklendi \n**Giriş-Çıkış** Mesajları Yenilendi!")            
+         return message.channel.send(güncel);
+ }
     //SUNUCUBİLGİ
     if(command === "sunucu") {
       const Discord = require('discord.js')
@@ -522,13 +586,70 @@ if(command === "kebapısmarla") {
     var cevap = cevaplar[Math.floor(Math.random() * cevaplar.length)]
     message.channel.send(cevap.toString())
    }
+  
+    if(command === "kaccm") {
+    let kaccm=[
+      "2cm",
+      "Anakonda Görse Arkadaşı Sanar",
+      "Zencimisin Birader?",
+      "10km fazla değilmi yav?",
+      "87 km Yuh Ebe*in A*ı",
+      "30 Metre",
+      "30cm",
+      "5cm",
+      "100 Metre",
+    ]
+      let embed = new Discord.RichEmbed()
+       .setDescription(`${kaccm[Math.floor(Math.random() * 9)]}`)
+       .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+       return message.channel.send(embed);
+       }
+  
+   if(command === "deepturkishweb") {
+       let yorum = [
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403263501591642122/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403263079300857856/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403262609870028831/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403264758968483860/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403265077400174594/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403265351544209409/unknown.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403265873504239616/unknown.png',
+                   'https://i.hizliresim.com/Lb2mJV.png',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403266409519382538/unknown.png',
+                   'https://i.hizliresim.com/76Y5Ol.png'
+                  ];
+       let embed = new Discord.RichEmbed()
+       .setImage(`${yorum[Math.floor(Math.random() * 10)]}`)
+       .setDescription(`Al sana bir yorum!`)
+       .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+       return message.channel.send(embed);
+       }
+  
+     if(command === "gmod-gif") {
+       let yorum = [
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403269867349737472/bf11f8a21cad60dfc99a0b0d93530f7da2fbc3d1_00.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403270231545479168/tumblr_nqoueohNaZ1u8tbq4o1_500.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403270496189153280/giphy.gif',
+                   'hhttps://cdn.discordapp.com/attachments/389448663270817792/403270700128796672/I_DONT_GIVE_A_SHIT_GMod.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403271058599182336/steamworkshop_webupload_previewfile_420135150_preview.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403271595122098176/VibrantComplicatedHarpyeagle-size_restricted.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403271972290560000/Dr-hax-1-o.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403272401502076928/1484936908_DefiantBelatedFattaileddunnart.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403272618972545024/UncommonInconsequentialClam-max-1mb.gif',
+                   'https://cdn.discordapp.com/attachments/389448663270817792/403273096896970763/giphy_1.gif'
+                  ];
+       let embed = new Discord.RichEmbed()
+       .setImage(`${yorum[Math.floor(Math.random() * 10)]}`)
+       .setDescription(``)
+       .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+       return message.channel.send(embed);
+       }
+  
 
-  //Özlü sözler
   if(command === "atasözü") {
     let ozlusoz=[
       "Aç ayı oynamaz.",
       "Mal istersen bedeninden, evlat istersen belinden",
-      "Mart ayı, dert ayı.",
       "Mayasız yoğurt tutmaz",
       "Baba ekmeği zindan ekmeği, koca ekmeği meydan ekmeği",
       "Ihlamurdan odun olmaz,beslemeden kadın olmaz",
@@ -544,8 +665,11 @@ if(command === "kebapısmarla") {
       "Kalem kılıçtan keskindir.",
       "Baba mirası yanan mum gibidir.",
     ]
-    message.channel.send(`${ozlusoz[Math.floor(Math.random() * 16)]}.`)
-    }
+      let embed = new Discord.RichEmbed()
+       .setDescription(`${ozlusoz[Math.floor(Math.random() * 16)]}`)
+       .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+       return message.channel.send(embed);
+       }
 
   //Hava DURUMUUUUUUUUİİİİİ
   if(command === "bugünhavanasıl") {
@@ -732,7 +856,7 @@ message.channel.send("Değiştirdim!")
  // EMBEDLER HARİKADIR! MÜKKEMMEL MESAJLAR YARATMAK İÇİN BUNLARI SİLME <3
     const Discord = require('discord.js')
          const profl = new Discord.RichEmbed()
-         .setImage(member.user.avatarURL)
+         .setImage( )
          .setFooter("DonluKebap")
          return message.channel.send(profl);
  }
@@ -749,5 +873,6 @@ message.channel.send("Değiştirdim!")
     message.channel.send(mesajsayisi +' adet mesajı sildim oh cillop gibi valla!')
   };
 });
+
 client.login(config.token);
 
